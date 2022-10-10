@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import { login } from "../firebase";
-import { Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { LoginUser } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import { isLogin } from "./store/auth";
+import { addUserInfo } from "./store/userInfo";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await login(email, password);
+    const user = await LoginUser(email, password);
+    console.log(user);
     if (user) {
-      Navigate("/profile", {
-        replace: true,
-      });
+      dispatch(isLogin(true));
+      dispatch(addUserInfo(user));
+      localStorage.setItem("isLogin", true);
+      navigate("/profile");
     }
   };
   return (

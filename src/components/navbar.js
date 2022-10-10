@@ -1,7 +1,16 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { isLogin } from "./store/auth";
 
 function Navbar() {
+  const login = useSelector((state) => state.auth.login);
+  const dispatch = useDispatch();
+  const isLoginFunction = () => {
+    {
+      login && dispatch(isLogin(false)) && localStorage.removeItem("isLogin");
+    }
+  };
   return (
     <div className="border-b-2 border-black">
       <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
@@ -59,10 +68,11 @@ function Navbar() {
               <li>
                 <Link to="/login">
                   <a
+                    onClick={isLoginFunction}
                     href="#"
                     class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   >
-                    Login
+                    {login ? "Logout" : "Login"}
                   </a>
                 </Link>
               </li>
@@ -76,16 +86,18 @@ function Navbar() {
                   </a>
                 </Link>
               </li>
-              <li>
-                <Link to="/profile">
-                  <a
-                    href="#"
-                    class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                  >
-                    Profile
-                  </a>
-                </Link>
-              </li>
+              {login && (
+                <li>
+                  <Link to="/profile">
+                    <a
+                      href="#"
+                      class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    >
+                      Profile
+                    </a>
+                  </Link>
+                </li>
+              )}
               <li>
                 <a
                   href="#"

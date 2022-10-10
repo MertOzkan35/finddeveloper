@@ -3,22 +3,19 @@ import { json } from "react-router-dom";
 // import { logout } from "../firebase";
 
 const initialState = {
-  user: false,
+  login: false,
 };
 
 const auth = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, action) => {
-      state.user = action.payload;
-    },
-    logoutt: (state) => {
-      state.user = false;
+    isLogin: (state, { payload }) => {
+      state.login = payload;
     },
   },
 });
 
-export const { login } = auth.actions;
-export const { logoutt } = auth.actions;
+export const { isLogin } = auth.actions;
+
 export default auth.reducer;
