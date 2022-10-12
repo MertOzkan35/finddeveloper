@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { useSelector, useDispatch } from "react-redux";
 import { addUserInfo } from "./components/store/userInfo";
+import { doc, getDoc } from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -11,10 +12,14 @@ import {
 } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
-// import store from "./store";
-// import { login as loginHandle, logoutt as logoutHandle } from "./store/auth";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadBytes,
+} from "firebase/storage";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -27,6 +32,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 export const register = async (email, password) => {
   try {
@@ -52,21 +58,6 @@ export const LoginUser = async (email, password) => {
   }
 };
 
-// export const login = (email, password) => {
-//   // const dispatch = useDispatch();
-
-//   return (dispatch) => {
-//     try {
-//       const { user } = signInWithEmailAndPassword(auth, email, password);
-//       console.log(user);
-//       dispatch(addUserInfo(user));
-//       return user;
-//     } catch (error) {
-//       toast.error(error.message);
-//     }
-//   };
-// };
-
 export const logout = async () => {
   try {
     await signOut(auth);
@@ -79,4 +70,15 @@ export const logout = async () => {
 export const addProfiles = async (data) => {
   const result = await addDoc(collection(db, "profiles"), data);
   console.log(result);
+};
+
+export const uploadFile = async (file, metadata) => {
+  const storageRef = ref(storage, "pdf/" + file.name);
+  await uploadBytes(storageRef, file, metadata);
+};
+
+export const getInfo = async () => {
+  const docRef = doc(db, "profiles");
+  const docSnap = await getDoc(docRef);
+  console.log(docSnap);
 };
