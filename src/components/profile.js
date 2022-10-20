@@ -15,8 +15,7 @@ function Profile() {
   const [CvimgUrl, setCvImgUrl] = useState(
     "https://cdn-icons-png.flaticon.com/512/524/524505.png"
   );
-  // const [file, setFile] = useState("");
-  console.log(imgUrl);
+
   const [addProfile, setAddProfile] = useState({
     FirstName: "",
     LastName: "",

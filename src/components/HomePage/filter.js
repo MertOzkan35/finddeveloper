@@ -2,7 +2,7 @@ import React from "react";
 
 function Filter() {
   return (
-    <div class="w-full md:w-2/3 shadow p-5 rounded-lg bg-white">
+    <div class="w-full md:w-2/3 mt-12 shadow p-5 rounded-lg bg-white">
       <div class="relative">
         <div class="absolute flex items-center ml-2 h-full">
           <svg

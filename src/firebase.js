@@ -10,7 +10,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import toast from "react-hot-toast";
 import {
   getStorage,
@@ -69,7 +69,7 @@ export const logout = async () => {
 
 export const addProfiles = async (data) => {
   const result = await addDoc(collection(db, "profiles"), data);
-  console.log(result);
+  // console.log(result);
 };
 
 export const uploadFile = async (file, metadata) => {
@@ -78,7 +78,11 @@ export const uploadFile = async (file, metadata) => {
 };
 
 export const getInfo = async () => {
-  const docRef = doc(db, "profiles");
-  const docSnap = await getDoc(docRef);
-  console.log(docSnap);
+  const querySnapshot = await getDocs(collection(db, "profiles"));
+  const data = [];
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    data.push(doc.data());
+  });
+  return data;
 };
