@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Uploader } from "uploader";
 import { UploadButton } from "react-uploader";
 import { addProfiles } from "../firebase";
-import { uploadFile } from "../firebase";
+import { uploadFile, updateProfile } from "../firebase";
 import toast from "react-hot-toast";
 import userEvent from "@testing-library/user-event";
 import { async } from "@firebase/util";
@@ -27,14 +27,26 @@ function Profile() {
   });
 
   const user = useSelector((state) => state.userInfo.Info);
+  const data = useSelector((state) => state.userDb.usersInfo);
+  const selectedUser = data && data.find((x) => x.uid === user.uid);
+
   const addNewProfile = async (e) => {
     e.preventDefault();
     toast.success("Successfully");
-    await addProfiles({
-      addProfile,
-      imgUrl,
-      uid: user.uid,
-    });
+    if (selectedUser) {
+      console.log("update");
+      await updateProfile({
+        addProfile,
+        imgUrl,
+        uid: user.uid,
+      });
+    } else {
+      await addProfiles({
+        addProfile,
+        imgUrl,
+        uid: user.uid,
+      });
+    }
   };
   const uploader = Uploader({
     apiKey: "free",
@@ -45,6 +57,7 @@ function Profile() {
   const uploadCv = async (event) => {
     const file = event.target.files[0];
     console.log(file);
+    setAddProfile({ ...addProfile, CvName: `${file.name}` });
     event.preventDefault();
     await uploadFile(file, metadata);
     toast.success("Successfully");
@@ -95,8 +108,8 @@ function Profile() {
           <div className="flex justify-center items-center text-center flex-col w-4/5 h-4/5 gap-6 ">
             <div className="w-full flex flex-col justify-center text-center items-center">
               <label
-                for="first_name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="first_name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 First name
               </label>
@@ -114,8 +127,8 @@ function Profile() {
 
             <div className="w-full flex flex-col justify-center text-center items-center">
               <label
-                for="first_name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="first_name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 Title
               </label>
@@ -133,8 +146,8 @@ function Profile() {
 
             <div className="w-full flex flex-col justify-center text-center items-center">
               <label
-                for="first_name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="first_name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 Linkedin URL
               </label>
@@ -153,8 +166,8 @@ function Profile() {
           <div className="flex justify-center items-center text-center flex-col w-4/5 h-4/5 gap-6  ">
             <div className="w-full flex flex-col justify-center text-center items-center">
               <label
-                for="first_name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="first_name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 Last name
               </label>
@@ -172,8 +185,8 @@ function Profile() {
 
             <div className="w-full flex flex-col justify-center text-center items-center">
               <label
-                for="first_name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="first_name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 Email address
               </label>
@@ -191,8 +204,8 @@ function Profile() {
 
             <div className="w-full flex flex-col justify-center text-center items-center">
               <label
-                for="first_name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="first_name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 City
               </label>
@@ -217,10 +230,11 @@ function Profile() {
               !addProfile.Email ||
               !addProfile.Title ||
               !addProfile.Linkedin ||
-              !addProfile.City
+              !addProfile.City ||
+              !addProfile.CvName
             }
             onClick={addNewProfile}
-            class="bg-blue-500 disabled:bg-[#CCA9AE] hover:bg-blue-700 text-white font-bold  py-2 px-4 rounded"
+            className="bg-blue-500 disabled:bg-[#CCA9AE] hover:bg-blue-700 text-white font-bold  py-2 px-4 rounded"
           >
             Save
           </button>

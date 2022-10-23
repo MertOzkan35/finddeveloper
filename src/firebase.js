@@ -2,7 +2,6 @@
 import { initializeApp } from "firebase/app";
 import { useSelector, useDispatch } from "react-redux";
 import { addUserInfo } from "./components/store/userInfo";
-import { doc, getDoc } from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -10,7 +9,16 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
 import toast from "react-hot-toast";
 import {
   getStorage,
@@ -69,11 +77,10 @@ export const logout = async () => {
 
 export const addProfiles = async (data) => {
   const result = await addDoc(collection(db, "profiles"), data);
-  // console.log(result);
 };
 
 export const uploadFile = async (file, metadata) => {
-  const storageRef = ref(storage, "pdf/" + file.name);
+  const storageRef = ref(storage, file.name);
   await uploadBytes(storageRef, file, metadata);
 };
 
@@ -85,4 +92,51 @@ export const getInfo = async () => {
     data.push(doc.data());
   });
   return data;
+};
+
+export const updateProfile = async (data) => {
+  const q = query(
+    collection(db, "profiles"),
+    where("uid", "==", auth.currentUser.uid)
+  );
+
+  const x = await getDocs(q);
+  x.forEach((docc) => {
+    const docRef = doc(db, "profiles", docc.id);
+    updateDoc(docRef, {
+      addProfile: data.addProfile,
+      imgUrl: data.imgUrl,
+      uid: data.uid,
+    });
+  });
+
+  const docRef = doc(db, "profiles", doc.id);
+};
+
+export const dowlandCv = async (CvName) => {
+  const storage = getStorage();
+  console.log(CvName);
+  const urlx = await getDownloadURL(ref(storage, CvName));
+  return urlx;
+  // .then((url) => {
+  // console.log(url);
+  // `url` is the download URL for 'images/stars.jpg'
+
+  /*  // This can be downloaded directly:
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "blob";
+      xhr.onload = (event) => {
+        const blob = xhr.response;
+      };
+      xhr.open("GET", url);
+      xhr.send();
+
+      // Or inserted into an <img> element
+      const img = document.getElementById("myimg");
+      img.setAttribute("src", url); */
+  // return url;
+  // })
+  // .catch((error) => {
+  //   // Handle any errors
+  // });
 };

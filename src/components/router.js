@@ -6,6 +6,7 @@ import Profile from "./profile";
 import Register from "./register";
 import { useSelector, useDispatch } from "react-redux";
 import User from "./user";
+import Contact from "./contact";
 
 function Rout() {
   const login = useSelector((state) => state.auth.login);
@@ -17,6 +18,7 @@ function Rout() {
         <Route path="/create" element={<Register />} />
         {login && <Route path="/profile" element={<Profile />} />}
         <Route path="/user/:id" element={<User />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
   );

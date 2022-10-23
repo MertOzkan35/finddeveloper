@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { json } from "react-router-dom";
-// import { logout } from "../firebase";
 
 const initialState = {
-  Info: {},
+  Info: { x: 1 },
 };
 
 const userInfo = createSlice({
@@ -11,7 +9,6 @@ const userInfo = createSlice({
   initialState,
   reducers: {
     addUserInfo: (state, { payload }) => {
-      console.log(payload);
       state.Info = payload;
     },
   },

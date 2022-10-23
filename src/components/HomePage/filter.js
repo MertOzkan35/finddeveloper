@@ -1,12 +1,12 @@
 import React from "react";
 
-function Filter() {
+function Filter(props) {
   return (
-    <div class="w-full md:w-2/3 mt-12 shadow p-5 rounded-lg bg-white">
-      <div class="relative">
-        <div class="absolute flex items-center ml-2 h-full">
+    <div className="w-full md:w-2/3 mt-12 shadow p-5 rounded-lg bg-white">
+      <div className="relative ">
+        <div className="absolute flex items-center ml-2 h-full">
           <svg
-            class="w-4 h-4 fill-current text-primary-gray-dark"
+            className="w-4 h-4 fill-current text-primary-gray-dark"
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -16,78 +16,103 @@ function Filter() {
         </div>
 
         <input
+          onChange={(event) => props.FilmName(event.target.value)}
           type="text"
-          placeholder="Search by listing, location, bedroom number..."
-          class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          placeholder="Search a Name..."
+          className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
         ></input>
       </div>
 
-      <div class="flex items-center justify-between mt-4">
-        <p class="font-medium">Filters</p>
-
-        <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
-          Reset Filter
-        </button>
-      </div>
-
-      <div>
-        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-          <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">All Type</option>
-            <option value="for-rent">For Rent</option>
-            <option value="for-sale">For Sale</option>
-          </select>
-
-          <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">Furnish Type</option>
-            <option value="fully-furnished">Fully Furnished</option>
-            <option value="partially-furnished">Partially Furnished</option>
-            <option value="not-furnished">Not Furnished</option>
-          </select>
-
-          <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">Any Price</option>
-            <option value="1000">RM 1000</option>
-            <option value="2000">RM 2000</option>
-            <option value="3000">RM 3000</option>
-            <option value="4000">RM 4000</option>
-          </select>
-
-          <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">Floor Area</option>
-            <option value="200">200 sq.ft</option>
-            <option value="400">400 sq.ft</option>
-            <option value="600">600 sq.ft</option>
-            <option value="800 sq.ft">800</option>
-            <option value="1000 sq.ft">1000</option>
-            <option value="1200 sq.ft">1200</option>
-          </select>
-
-          <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">Bedrooms</option>
-            <option value="1">1 bedroom</option>
-            <option value="2">2 bedrooms</option>
-            <option value="3">3 bedrooms</option>
-            <option value="4">4 bedrooms</option>
-            <option value="5">5 bedrooms</option>
-          </select>
-
-          <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">Bathrooms</option>
-            <option value="1">1 bathroom</option>
-            <option value="2">2 bathrooms</option>
-            <option value="3">3 bathrooms</option>
-            <option value="4">4 bathrooms</option>
-            <option value="5">5 bathrooms</option>
-          </select>
-
-          <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-            <option value="">Bathrooms</option>
-            <option value="1">1 space</option>
-            <option value="2">2 space</option>
-            <option value="3">3 space</option>
-          </select>
-        </div>
+      <div className="flex items-center  mt-4">
+        <p className="font-medium">Filter</p>
+        <select
+          className="px-4 py-3 w-1/4 ml-4  rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          onChange={(event) => props.ChangeYear({ year: event.target.value })}
+        >
+          <option value="">All City</option>
+          <option>------</option>
+          <option>Adana</option>
+          <option>Adıyaman</option>
+          <option>Afyonkarahisar</option>
+          <option>Ağrı</option>
+          <option>Amasya</option>
+          <option>Ankara</option>
+          <option>Antalya</option>
+          <option>Artvin</option>
+          <option>Aydın</option>
+          <option>Balıkesir</option>
+          <option>Bilecik</option>
+          <option>Bingöl</option>
+          <option>Bitlis</option>
+          <option>Bolu</option>
+          <option>Burdur</option>
+          <option>Bursa</option>
+          <option>Çanakkale</option>
+          <option>Çankırı</option>
+          <option>Çorum</option>
+          <option>Denizli</option>
+          <option>Diyarbakır</option>
+          <option>Edirne</option>
+          <option>Elazığ</option>
+          <option>Erzincan</option>
+          <option>Erzurum</option>
+          <option>Eskişehir</option>
+          <option>Gaziantep</option>
+          <option>Giresun</option>
+          <option>Gümüşhane</option>
+          <option>Hakkâri</option>
+          <option>Hatay</option>
+          <option>Isparta</option>
+          <option>Mersin</option>
+          <option>İstanbul</option>
+          <option>İzmir</option>
+          <option>Kars</option>
+          <option>Kastamonu</option>
+          <option>Kayseri</option>
+          <option>Kırklareli</option>
+          <option>Kırşehir</option>
+          <option>Kocaeli</option>
+          <option>Konya</option>
+          <option>Kütahya</option>
+          <option>Malatya</option>
+          <option>Manisa</option>
+          <option>Kahramanmaraş</option>
+          <option>Mardin</option>
+          <option>Muğla</option>
+          <option>Muş</option>
+          <option>Nevşehir</option>
+          <option>Niğde</option>
+          <option>Ordu</option>
+          <option>Rize</option>
+          <option>Sakarya</option>
+          <option>Samsun</option>
+          <option>Siirt</option>
+          <option>Sinop</option>
+          <option>Sivas</option>
+          <option>Tekirdağ</option>
+          <option>Tokat</option>
+          <option>Trabzon</option>
+          <option>Tunceli</option>
+          <option>Şanlıurfa</option>
+          <option>Uşak</option>
+          <option>Van</option>
+          <option>Yozgat</option>
+          <option>Zonguldak</option>
+          <option>Aksaray</option>
+          <option>Bayburt</option>
+          <option>Karaman</option>
+          <option>Kırıkkale</option>
+          <option>Batman</option>
+          <option>Şırnak</option>
+          <option>Bartın</option>
+          <option>Ardahan</option>
+          <option>Iğdır</option>
+          <option>Yalova</option>
+          <option>Karabük</option>
+          <option>Kilis</option>
+          <option>Osmaniye</option>
+          <option>Düzce</option>
+        </select>
       </div>
     </div>
   );
