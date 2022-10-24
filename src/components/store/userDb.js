@@ -9,7 +9,6 @@ const userDb = createSlice({
   initialState,
   reducers: {
     addUserDb: (state, { payload }) => {
-      console.log(payload);
       state.usersInfo = payload;
     },
   },

@@ -7,7 +7,6 @@ import { isLogin } from "./components/store/auth";
 import { addUserInfo } from "./components/store/userInfo";
 import { addUserDb } from "./components/store/userDb";
 import Footer from "./components/footer";
-import { getInfo } from "./firebase";
 
 function App() {
   const dispatch = useDispatch();

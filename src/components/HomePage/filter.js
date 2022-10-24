@@ -26,7 +26,7 @@ function Filter(props) {
       <div className="flex items-center  mt-4">
         <p className="font-medium">Filter</p>
         <select
-          className="px-4 py-3 w-1/4 ml-4  rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          className="px-4 py-3 w-1/4 ml-4  rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 md:text-sm text-[10px]"
           onChange={(event) => props.ChangeYear({ year: event.target.value })}
         >
           <option value="">All City</option>

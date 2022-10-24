@@ -65,7 +65,7 @@ function Profile() {
 
   return (
     <div className="flex justify-center items-center w-full h-[1000px]">
-      <div className=" flex justify-center items-center flex-col w-4/5 h-4/5 bg-[#f3f3f3]">
+      <div className=" flex justify-center items-center flex-col w-full md:w-4/5 h-4/5 bg-[#f3f3f3]">
         <div className=" flex w-4/5 h-1/3 mb-4 justify-center items-center ">
           <div className="w-1/2 h-full rounded-full   flex flex-col justify-center items-center mt-2 gap-4">
             {imgUrl !== null && (

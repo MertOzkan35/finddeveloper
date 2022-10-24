@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { register } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     const user = await register(email, password);
+    navigate("/login");
   };
   return (
     <div>
