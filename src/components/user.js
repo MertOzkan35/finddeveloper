@@ -9,21 +9,11 @@ function User() {
 
   const selectedUser = newData && newData.find((x) => x.uid === id);
 
-  const cv = async () => {
-    console.log(selectedUser.addProfile.CvName);
+  const downloadTxtFile = async () => {
     const url = await dowlandCv(selectedUser.addProfile.CvName);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `FileName.pdf`);
-
-    // Append to html link element page
-    document.body.appendChild(link);
-
-    // Start download
-    link.click();
-
-    // Clean up and remove the link
-    link.parentNode.removeChild(link);
+    const element = document.createElement("a");
+    window.open(url, "_blank", "noopener,noreferrer");
+    element.click();
   };
   return (
     <div className=" flex flex-col w-full h-full  justify-center items-center font">
@@ -40,7 +30,7 @@ function User() {
             </div>
             <button
               className=" w-full md:w-1/2 h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded md:text-base text-sm"
-              onClick={cv}
+              onClick={downloadTxtFile}
             >
               {" "}
               Download Cv
