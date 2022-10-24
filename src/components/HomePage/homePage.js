@@ -54,15 +54,15 @@ function HomePage() {
                     src={element.imgUrl}
                   />
 
-                  <div className="flex flex-col justify-between mt-4  h-[50%] gap-6">
-                    <p className="pt-3 font-semibold text-xl   text-center  ">
+                  <div className="flex w-full whitespace-normal  overflow-hidden flex-col justify-between mt-4  h-[50%] gap-6 ">
+                    <p className=" w-full  p-4 whitespace-normal  overflow-hidden pt-3 font-semibold text-xl   text-center  ">
                       {element.addProfile.FirstName}{" "}
                       {element.addProfile.LastName}
                     </p>
-                    <p className="  pb-12 text-lg text-center">
+                    <p className=" p-4  pb-12 text-lg text-center overflow-hidden">
                       {element.addProfile.Title}
                     </p>
-                    <p className="pb-4 text-md   text-center">
+                    <p className="p-4  text-md   text-center overflow-hidden">
                       {element.addProfile.City}
                     </p>
                   </div>
