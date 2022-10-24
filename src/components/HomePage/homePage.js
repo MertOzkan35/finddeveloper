@@ -35,7 +35,7 @@ function HomePage() {
 
   const YearSelectValue = (event) => {
     const city = event.year;
-    console.log(city);
+
     setNewDb(profile);
     setNewDb(profile.filter((item) => item.addProfile.City.includes(city)));
   };

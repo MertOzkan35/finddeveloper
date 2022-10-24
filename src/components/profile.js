@@ -34,7 +34,7 @@ function Profile() {
     e.preventDefault();
     toast.success("Successfully");
     if (selectedUser) {
-      console.log("update");
+      
       await updateProfile({
         addProfile,
         imgUrl,
@@ -56,7 +56,7 @@ function Profile() {
   };
   const uploadCv = async (event) => {
     const file = event.target.files[0];
-    console.log(file);
+    
     setAddProfile({ ...addProfile, CvName: `${file.name}` });
     event.preventDefault();
     await uploadFile(file, metadata);

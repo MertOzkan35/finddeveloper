@@ -58,7 +58,6 @@ export const register = async (email, password) => {
 export const LoginUser = async (email, password) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
-    console.log(user);
 
     return user;
   } catch (error) {
@@ -115,7 +114,7 @@ export const updateProfile = async (data) => {
 
 export const dowlandCv = async (CvName) => {
   const storage = getStorage();
-  console.log(CvName);
+
   const urlx = await getDownloadURL(ref(storage, CvName));
   return urlx;
   // .then((url) => {
