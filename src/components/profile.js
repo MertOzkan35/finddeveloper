@@ -13,7 +13,7 @@ function Profile() {
     "https://cdn-icons-png.flaticon.com/512/1144/1144709.png"
   );
   const [CvimgUrl, setCvImgUrl] = useState(
-    "https://cdn-icons-png.flaticon.com/512/524/524505.png"
+    "https://cdn-icons-png.flaticon.com/512/3135/3135692.png"
   );
 
   const [addProfile, setAddProfile] = useState({
@@ -26,21 +26,26 @@ function Profile() {
     CvName: "",
   });
 
+  const [stopButton, setStopButton] = useState(false);
+
   const user = useSelector((state) => state.userInfo.Info);
   const data = useSelector((state) => state.userDb.usersInfo);
   const selectedUser = data && data.find((x) => x.uid === user.uid);
 
   const addNewProfile = async (e) => {
     e.preventDefault();
-    toast.success("Successfully");
     if (selectedUser) {
-      
+      toast.success("Successfully");
       await updateProfile({
         addProfile,
         imgUrl,
         uid: user.uid,
       });
+    } else if (stopButton === true) {
+      toast.success("profile pre-registered");
     } else {
+      toast.success("Successfully");
+      setStopButton(true);
       await addProfiles({
         addProfile,
         imgUrl,
@@ -56,7 +61,7 @@ function Profile() {
   };
   const uploadCv = async (event) => {
     const file = event.target.files[0];
-    
+
     setAddProfile({ ...addProfile, CvName: `${file.name}` });
     event.preventDefault();
     await uploadFile(file, metadata);
@@ -91,10 +96,7 @@ function Profile() {
           </div>
           <div className="w-1/2 h-full rounded-full   flex flex-col justify-center items-center mt-2 gap-4">
             {imgUrl !== null && (
-              <img
-                className=" h-2/4 object-cover rounded-full my-3"
-                src={CvimgUrl}
-              />
+              <img className=" h-2/4 object-cover  my-3" src={CvimgUrl} />
             )}
 
             <input
