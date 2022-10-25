@@ -6,7 +6,7 @@ function Footer() {
     <div className="w-full h-[10rem] flex justify-between border-t-2 border-x-gray-900 p-4 md:p-12 text-[8px] ">
       <p className="pt-[6px]">
         {" "}
-        Finddeveloper kar amacı gütmeyen, deneme amaçlı bir uygulamadır.
+        Finddeveloper kar amacı gütmeyen, deneme amaçlı bir uygulamadır...
       </p>
       <a href="https://www.linkedin.com/in/mertozkann/">
         <svg
